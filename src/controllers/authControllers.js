@@ -10,7 +10,7 @@ export function showLogin(req, res) {
 export async function login(req, res) {
   const { correo, contrasena } = req.body;
 
-  if (!email || !password) {
+  if (!correo || !contrasena) {
         return  res.status(400).render("mensaje", {
           titulo: "Iniciar sesión", 
           mensaje: "Todos los campos son obligatorios"})
@@ -36,18 +36,30 @@ export async function login(req, res) {
         titulo: "Iniciar sesión",
         mensaje: "Credenciales inválidas"})
 
-    } else {
-      req.session.user = usuario;
-
-      if (usuario.admin) {
-        res.redirect('/'); // Acceso completo
-      } else {
-        res.redirect('/'); // Solo visualización
-      }
     }
+    
+    req.session.user = usuario;
+
+    // creamos la info para crear la cookie
+    const infoCookie = {id: usuario.id, nombre: usuario.nombre, email: usuario.email}
+
+    res.cookie('auth', JSON.stringify(infoCookie), {
+      httpOnly: true,
+      signed: true,
+      maxAge: 1000 * 60 * 5
+    })
+    
+    // si el usuario intentaba ingresar a otra ruta antes de logearse
+      // lo redireccionamos
+
+    const nextUrl = req.query.next || '/'
+    res.redirect(nextUrl)
 
   } catch (error) {
-    
+    console.log(error)
+    res.status(500).render("mensaje", {
+      titulo: "Error", 
+      mensaje: "No se pudo iniciar sesión"})
   }
   
 };
