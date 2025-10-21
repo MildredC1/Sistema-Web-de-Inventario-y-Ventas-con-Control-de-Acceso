@@ -1,0 +1,30 @@
+{
+  "name": "sistema-web-de-inventario-y-ventas-con-control-de-acceso",
+  "version": "1.0.0",
+  "description": "El objetivo del proyecto es desarrollar un sitio web funcional de inventario y ventas utilizando Node.js, Express y MySQL, aplicando la arquitectura MVC y buenas prácticas de desarrollo.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MildredC1/Sistema-Web-de-Inventario-y-Ventas-con-Control-de-Acceso.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MildredC1/Sistema-Web-de-Inventario-y-Ventas-con-Control-de-Acceso/issues"
+  },
+  "homepage": "https://github.com/MildredC1/Sistema-Web-de-Inventario-y-Ventas-con-Control-de-Acceso#readme",
+  "devDependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.2"
+  }
+}
