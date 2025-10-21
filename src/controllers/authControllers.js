@@ -62,4 +62,12 @@ export async function login(req, res) {
       mensaje: "No se pudo iniciar sesión"})
   }
   
-};
+}
+// cerrar sesión(GET)
+export async function logout(req, res) {
+
+    res.clearCookie('auth')
+
+    res.render("mensaje", {titulo: "Salida", mensaje: "Sesión cerrada correctamente"})
+    
+}
