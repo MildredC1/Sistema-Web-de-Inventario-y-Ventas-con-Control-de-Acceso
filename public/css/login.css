@@ -1,0 +1,186 @@
+/*importanto una familyfont de google*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    /* Mantenemos los colores primarios para el contraste */
+    --primary-color: #fff; /* Color del texto y elementos */
+    --form-bg-color: rgba(255, 255, 255, 0.15); /* Fondo del formulario (un poco transparente) */
+    --input-bg-color: rgba(255, 255, 255, 0.2);
+    --input-border-color: rgba(255, 255, 255, 0.5);
+    --login-btn-color: #e0e0e0; /* Color del botón de LOGIN */
+    --register-btn-color: rgba(255, 255, 255, 0.3); /* Color del botón de Crear nueva cuenta */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+    /* fondo (Pink-Blue Neon Gradient) */
+    background: linear-gradient(135deg, #f538a7, #385ef5); 
+    
+    color: var(--primary-color);/*llamando la ruta (root) color primario*/
+}
+
+/* Contenedor Principal del Formulario */
+.login-container {
+    width: 350px;
+    padding: 30px;
+    border-radius: 20px;
+    
+    /* Un efecto de Glassmorphism */
+    background: var(--form-bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Borde más visible */
+    backdrop-filter: blur(15px); /* Más desenfoque para resaltar el contraste */
+    
+    /* Sombra exterior para el "vidrio" */
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+    
+    /* Mantenemos un gradiente interno (Glassmorphism) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+    
+    /* Se elimina el gradiente oscuro interno anterior*/
+    background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    overflow: hidden; 
+}
+
+.login-form {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Avatar Placeholder */
+.avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-placeholder i {
+    font-size: 40px;
+    color: var(--primary-color);
+    opacity: 0.9;
+}
+
+/* Grupos de entrada (Icono + Input) */
+.input-group {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.input-group .icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    opacity: 0.8;
+    font-size: 16px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 10px 10px 40px; 
+    background: var(--input-bg-color);
+    border: none;
+    border-bottom: 1px solid var(--input-border-color);
+    color: var(--primary-color);
+    font-size: 16px;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.input-group input::placeholder {
+    color: var(--primary-color);
+    opacity: 0.8;
+}
+
+.input-group input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+/* Área de botones y 'Olvidaste tu contraseña' */
+.actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.forgot-password:hover {
+    opacity: 1;
+}
+
+/* Estilo general de los botones */
+.btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Botón LOGIN */
+.login-btn {
+    background: var(--login-btn-color);
+    color: #385ef5; /* Color del texto más oscuro para el contraste */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    flex-grow: 0;
+    padding: 10px 30px;
+}
+
+.login-btn:hover {
+    background: var(--primary-color);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón de Crear nueva cuenta (el bloque inferior separado) */
+.register-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background: var(--register-btn-color);
+    color: var(--primary-color);
+    font-size: 16px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.register-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
