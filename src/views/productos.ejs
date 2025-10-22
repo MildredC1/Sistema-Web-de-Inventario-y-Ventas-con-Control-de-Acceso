@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Productos</title>
+  <link rel="stylesheet" href="../../public/css/productos.css">
+</head>
+<body>
+  <h1>Productos</h1>
+
+  <h2>Productos registrados</h2>
+  <div class="table-container">
+    <table>
+        <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Categoria</th>
+        <th>Marca</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Proveedor_email</th>
+        <th>Rating</th>
+        <th>Creado_es</th>
+        <th>Descuento</th>
+        <th>Acciones</th>
+        </tr>
+
+        <% productos.forEach((producto, index) => { %>
+        <tr>
+            <!-- Formulario para editar Productos -->
+            <form action="/productos" method="POST" class="editar-form">
+            <!-- enviar id en el body para que el controlador lo reciba en req.body.id -->
+            <input type="hidden" name="id" value="<%= producto.id %>">
+            <td><%= producto.id %></td>
+            <td>
+                <input type="text" name="nombre" id="nombre-<%= index %>" value="<%= producto.nombre %>" readonly>
+            </td>
+            <td>
+                <input type="text" name="categoria" id="categoria-<%= index %>" value="<%= producto.categoria %>" readonly>
+            </td>
+            <td>
+                <input type="text" name="marca" id="marca-<%= index %>" value="<%= producto.marca %>" readonly>
+            </td>
+            <td>
+                <input type="text" name="precio" id="precio-<%= index %>" value="<%= producto.precio %>" readonly>
+            </td>
+            <td>
+                <input type="text" name="stock" id="stock-<%= index %>" value="<%= producto.stock %>" readonly>
+            </td>
+            <td>
+                <input type="text" name="proveedor_email" id="proveedor_email-<%= index %>" value="<%= producto.proveedor_email %>" readonly>
+            </td>
+            <td>
+                <input type="text" name="rating" id="rating-<%= index %>" value="<%= producto.rating %>" readonly>
+            </td>
+            <td><%= producto.creado_es %></td>
+            <td>
+                <input type="text" name="descuento" id="descuento-<%= index %>" value="<%= producto.descuento %>" readonly>
+            </td>
+
+            <td>
+                <button type="button" id="editarBtn-<%= index %>" onclick="habilitarEdicion(<%= index %>)">Editar</button>
+                <button type="submit" name="action" value="editar" id="guardarBtn-<%= index %>" style="display:none;">Guardar</button>
+                <button type="button" id="cancelarBtn-<%= index %>" onclick="cancelarEdicion(<%= index %>)" style="display:none;">Cancelar</button>
+                <button type="submit" name="action" value="eliminar" id="eliminarBtn-<%= index %>">Eliminar</button>
+            </td>
+            </form>        
+        </tr>
+        <% }) %>
+    </table>
+  </div> 
+  
+  <script>
+    // Guardar valor original para poder restaurar en Cancelar
+    const valoresOriginales = {};
+    const camposEditables = ['nombre', 'categoria', 'marca', 'precio', 'stock', 'proveedor_email', 'rating', 'descuento'];
+    
+    function habilitarEdicion(index) {
+      const editarBtn = document.getElementById(`editarBtn-${index}`);
+      const guardarBtn = document.getElementById(`guardarBtn-${index}`);
+      const cancelarBtn = document.getElementById(`cancelarBtn-${index}`);
+      const eliminarBtn = document.getElementById(`eliminarBtn-${index}`);
+
+      // Guardar valores originales y habilitar edicion para todos los campos
+      valoresOriginales[index] = {};
+      
+      camposEditables.forEach(campo => {
+        const input = document.getElementById(`${campo}-${index}`);
+        // Guardar valor original
+        valoresOriginales[index][campo] = input.value;
+        // Habilitar edicion
+        input.removeAttribute('readonly');
+      });
+
+      // Poner el foco en el primer campo editable (nombre)
+      document.getElementById(`nombre-${index}`).focus();
+
+      // Mostrar/ocultar botones
+      editarBtn.style.display = 'none';
+      guardarBtn.style.display = 'inline';
+      cancelarBtn.style.display = 'inline';
+      eliminarBtn.style.display = 'none';
+    }
+
+    function cancelarEdicion(index) {
+      const editarBtn = document.getElementById(`editarBtn-${index}`);
+      const guardarBtn = document.getElementById(`guardarBtn-${index}`);
+      const cancelarBtn = document.getElementById(`cancelarBtn-${index}`);
+      const eliminarBtn = document.getElementById(`eliminarBtn-${index}`);
+      
+      // Restaurar valores originales y volver a modo solo lectura
+      camposEditables.forEach(campo => {
+        const input = document.getElementById(`${campo}-${index}`);
+        // Restaurar valor original
+        input.value = valoresOriginales[index][campo];
+        input.setAttribute('readonly', true);
+      });
+
+      // Restaurar botones
+      editarBtn.style.display = 'inline';
+      guardarBtn.style.display = 'none';
+      cancelarBtn.style.display = 'none';
+      eliminarBtn.style.display = 'inline';
+    }
+  </script>
+
+</body>
+</html>
