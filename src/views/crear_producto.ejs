@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuevo Producto</title>
+  <link rel="stylesheet" href="/public/css/productos.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1>Agregar nuevo producto</h1>
+    <form method="POST" action="/productos">
+      
+      <div class="input-full-width">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" maxlength="60" required>
+      </div>
+
+      <div class="input-full-width">
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" name="categoria" maxlength="30" required>
+      </div>
+
+      <div class="input-full-width">
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" maxlength="40" required>
+      </div>
+
+      <div class="input-row">
+        <div class="input-group">
+          <label for="precio">Precio:</label>
+          <input type="number" id="precio" name="precio" step="0.01" min="0" required>
+        </div>
+        <div class="input-group">
+          <label for="stock">Stock:</label>
+          <input type="number" id="stock" name="stock" min="0" required>
+        </div>
+      </div>
+
+      <div class="input-full-width">
+        <label for="proveedor_email">Proveedor Email:</label>
+        <input type="email" id="proveedor_email" name="proveedor_email" maxlength="120" required>
+      </div>
+
+      <div class="input-row">
+        <div class="input-group">
+          <label for="rating">Rating:</label>
+          <input type="number" id="rating" name="rating" step="0.1" min="0" max="5" required>
+        </div>
+        <div class="input-group">
+          <label for="descuento">Descuento:</label>
+          <input type="number" id="descuento" name="descuento" step="0.01" min="0" max="0.80" required>
+        </div>
+      </div>
+
+      <button type="submit" name="action" value="crear">Guardar producto</button>
+    </form>
+  </div>
+</body>
+</html>
