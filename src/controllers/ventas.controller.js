@@ -1,8 +1,41 @@
-const Ventas = require("../models/ventas.model.js")
-const ProductosModel = require("../models/productos.model.js")
+const ventasModel = require("../models/ventas.model.js")
+const productosModel = require("../models/productos.model.js")
 
 const VentasController = {
     // Muestrar vista de ventas (formulario para registrar e historial)
+    async mostrar(req, res) {
+        try {
+            // Necesitamos los productos para llenar el <campos> en el formulario
+            productosModel.listar((errorProductos, productos) => {
+                if (errorProductos) {
+                    throw new Error("Error al obtener productos: " + errorProductos.message)
+                }
+
+                ventasModel.listar((errorVentas, historialVentas) => {
+                    if (errorVentas) {
+                        // Manejar error de listado de ventas (si ocurre)
+                        console.error("Error al listar ventas:", errorVentas)
+                        historialVentas = [] // Mostrar historial vacío si falla
+                    }
+
+                    // req.user esta disponible por el middleware
+                    
+                    const esAdmin = req.user ? req.user.admin : false
+
+                    return res.render("ventas", {
+                        productos,
+                        historialVentas,
+                        esAdmin // Pasamos el rol para futuras validaciones en la vista
+                    })
+                })
+            })
+        } catch (error) {
+            return res.status(500).render("mensaje", {
+                titulo: "Error en el módulo de Ventas",
+                mensaje: error.message
+            })
+        }
+    },
 
     // Procesar el registro de una nueva venta
     registrar(req, res) {
@@ -19,7 +52,7 @@ const VentasController = {
         const cantidadVenta = parseInt(cantidad)
 
         // Validar cantidad ≤ stock (Buscar stock actual)
-        Ventas.buscarStock(producto_id, (error, resultadosStock) => {
+        ventasModel.buscarStock(producto_id, (error, resultadosStock) => {
             if (error || resultadosStock.length === 0) {
                 return res.status(500).render("mensaje", {
                     titulo: "Error de Validación",
@@ -37,7 +70,7 @@ const VentasController = {
             }
 
             // Registrar la venta
-            Ventas.crear({ producto_id, cantidad: cantidadVenta, vendedor_id }, (errorVenta, resultadoVenta) => {
+            ventasModel.crear({ producto_id, cantidad: cantidadVenta, vendedor_id }, (errorVenta, resultadoVenta) => {
                 if (errorVenta) {
                     console.error("Error al registrar venta:", errorVenta)
                     return res.status(500).render("mensaje", {
@@ -47,7 +80,7 @@ const VentasController = {
                 }
 
                 // Restar stock en productos
-                Ventas.actualizarStock({ producto_id, cantidad: cantidadVenta }, (errorStock, resultadoStock) => {
+                ventasModel.actualizarStock({ producto_id, cantidad: cantidadVenta }, (errorStock, resultadoStock) => {
                     if (errorStock) {
                         // simular transaccion
                         console.error("ERROR CRÍTICO: Stock no actualizado después de la venta:", errorStock)
