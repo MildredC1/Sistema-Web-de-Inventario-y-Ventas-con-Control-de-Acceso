@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ventas</title>
+  <link rel="stylesheet" href="/public/css/ventas.css">
+</head>
+<body>
+  <h1>Ventas</h1>
+
+  <h2>Ventas registradas</h2>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Fecha</th>
+        <th>Vendedor</th>
+        <th>Acciones</th>
+      </tr>
+
+      <% ventas.forEach((venta, index) => { %>
+      <tr>
+        <form action="/ventas" method="POST" class="editar-form">
+          <input type="hidden" name="id" value="<%= venta.id %>">
+          <td><%= venta.id %></td>
+          <td>
+            <input type="text" name="producto_nombre" id="producto_nombre-<%= index %>" value="<%= venta.producto_nombre %>" readonly>
+          </td>
+          <td>
+            <input type="number" name="cantidad" id="cantidad-<%= index %>" value="<%= venta.cantidad %>" readonly>
+          </td>
+          <td><%= venta.fecha %></td>
+          <td><%= venta.vendedor_nombre %></td>
+
+          <td>
+            <% if (esAdmin) { %>
+              <button type="button" id="editarBtn-<%= index %>" onclick="habilitarEdicion(<%= index %>)">Editar</button>
+              <button type="submit" name="action" value="editar" id="guardarBtn-<%= index %>" style="display:none;">Guardar</button>
+              <button type="button" id="cancelarBtn-<%= index %>" onclick="cancelarEdicion(<%= index %>)" style="display:none;">Cancelar</button>
+              <button type="submit" name="action" value="eliminar" id="eliminarBtn-<%= index %>">Eliminar</button>
+            <% } else { %>
+              <span>Solo Visualización</span>
+            <% } %>
+          </td>
+        </form>
+      </tr>
+      <% }) %>
+    </table>
+  </div>
+
+  <script>
+    const valoresOriginales = {};
+    const camposEditables = ['producto_nombre', 'cantidad'];
+
+    function habilitarEdicion(index) {
+      const editarBtn = document.getElementById(`editarBtn-${index}`);
+      const guardarBtn = document.getElementById(`guardarBtn-${index}`);
+      const cancelarBtn = document.getElementById(`cancelarBtn-${index}`);
+      const eliminarBtn = document.getElementById(`eliminarBtn-${index}`);
+
+      valoresOriginales[index] = {};
+
+      camposEditables.forEach(campo => {
+        const input = document.getElementById(`${campo}-${index}`);
+        valoresOriginales[index][campo] = input.value;
+        input.removeAttribute('readonly');
+      });
+
+      document.getElementById(`producto_nombre-${index}`).focus();
+
+      editarBtn.style.display = 'none';
+      guardarBtn.style.display = 'inline';
+      cancelarBtn.style.display = 'inline';
+      eliminarBtn.style.display = 'none';
+    }
+
+    function cancelarEdicion(index) {
+      const editarBtn = document.getElementById(`editarBtn-${index}`);
+      const guardarBtn = document.getElementById(`guardarBtn-${index}`);
+      const cancelarBtn = document.getElementById(`cancelarBtn-${index}`);
+      const eliminarBtn = document.getElementById(`eliminarBtn-${index}`);
+
+      camposEditables.forEach(campo => {
+        const input = document.getElementById(`${campo}-${index}`);
+        input.value = valoresOriginales[index][campo];
+        input.setAttribute('readonly', true);
+      });
+
+      editarBtn.style.display = 'inline';
+      guardarBtn.style.display = 'none';
+      cancelarBtn.style.display = 'none';
+      eliminarBtn.style.display = 'inline';
+    }
+
+    function confirmarEliminacion(index) {
+      const producto = document.getElementById(`producto_nombre-${index}`).value;
+      const confirmado = confirm(`¿Estás segura de que deseas eliminar la venta del producto "${producto}"?`);
+
+      if (confirmado) {
+        const form = document.querySelectorAll('.editar-form')[index];
+        const accionInput = document.createElement('input');
+        accionInput.type = 'hidden';
+        accionInput.name = 'action';
+        accionInput.value = 'eliminar';
+        form.appendChild(accionInput);
+        form.submit();
+      }
+    }
+  </script>
+</body>
+</html>

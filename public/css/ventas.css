@@ -1,0 +1,127 @@
+
+:root {
+  --primary-color: rgba(85, 79, 79, 0.274);
+  --secondary-color: #e91e63;
+  --background-gradient: linear-gradient(135deg, #7b4397 0%, #dc2430 100%);
+  --text-color: #333;
+  --glass-color: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+/* Fondo y tipografía */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--background-gradient);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Contenedor de tabla con efecto glass */
+.table-container {
+  width: 90%;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 15px;
+  border-radius: 25px;
+  background: var(--glass-color);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  font-size: 0.95em;
+  color: white;
+}
+
+th {
+  background-color: var(--primary-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Inputs */
+input[type="text"], input[type="number"] {
+  padding: 6px;
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #333;
+}
+
+input[readonly] {
+  background-color: transparent;
+  border-color: transparent;
+  cursor: default;
+  color: white;
+}
+
+/* Botones */
+button {
+  padding: 8px 12px;
+  margin: 2px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+button:active {
+  transform: translateY(1px);
+}
+
+button[id^="editarBtn-"] {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
+  color: #333;
+}
+
+button[id^="guardarBtn-"] {
+  background-color: #28a745;
+  color: white;
+}
+
+button[id^="cancelarBtn-"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+button[id^="eliminarBtn-"] {
+  background: var(--secondary-color);
+  color: white;
+}
