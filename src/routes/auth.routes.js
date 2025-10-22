@@ -2,6 +2,7 @@ import {Router} from 'express';
 
 import * as auth from "../controllers/auth.controller.js"
 import productosController from "../controllers/productos.controller.js"
+import ventasController from '../controllers/ventas.controller.js';
 
 import { requiereAuth, redireccionAuth } from '../middlewares/auth.js';
 
@@ -14,7 +15,12 @@ router.post('/login', auth.login)
 // Rutas relacionadas con 'Cierre de sesión'
 router.get("/logout", auth.logout)
 
-router.get("/productos", requiereAuth, productosController.listar)
-router.post("/productos", requiereAuth, productosController.procesar)
+// Rutas relacionadas con 'Productos'
+router.get("/productos", requiereAuth, productosController.listar) // Mostrar formulario y listado Productos
+router.post("/productos", requiereAuth, productosController.procesar) // Procesar registro Productos
+
+// Rutas relacionadas con 'Ventas'
+router.get("/ventas", requiereAuth, ventasController.mostrar)   // Mostrar formulario y listado Ventas
+router.post("/ventas", requiereAuth, ventasController.registrar) // Procesar registro Ventas
 
 export default router
