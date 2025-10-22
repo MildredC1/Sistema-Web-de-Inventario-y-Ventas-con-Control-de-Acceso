@@ -33,6 +33,18 @@ const VentasModel = {
         const parametros = [producto_id, cantidad, vendedor_id]
 
         mysql.query(query, parametros, (err, results) => cb(err, results))
+    },
+
+    // Actualiza el stock después de una venta (Restar stock)
+    actualizarStock({ producto_id, cantidad }, cb) {
+        const query = `
+            UPDATE productos
+            SET stock = stock - ?
+            WHERE id = ?`
+
+        const parametros = [cantidad, producto_id]
+        
+        mysql.query(query, parametros, (err, results) => cb(err, results))
     }
 }
 

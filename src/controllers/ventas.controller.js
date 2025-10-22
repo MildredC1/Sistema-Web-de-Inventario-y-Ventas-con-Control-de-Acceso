@@ -46,9 +46,20 @@ const VentasController = {
                     })
                 }
 
-                // Si todo sale bien redireccionar
-                return res.redirect('/ventas?venta=ok')
-                
+                // Restar stock en productos
+                Ventas.actualizarStock({ producto_id, cantidad: cantidadVenta }, (errorStock, resultadoStock) => {
+                    if (errorStock) {
+                        // simular transaccion
+                        console.error("ERROR CRÍTICO: Stock no actualizado después de la venta:", errorStock)
+                        return res.status(500).render("mensaje", {
+                            titulo: "Venta Registrada, Error de Inventario",
+                            mensaje: "Venta registrada, pero falló la actualización del inventario. Revisar logs."
+                        })
+                    }
+
+                    // Si todo sale bien redireccionar
+                    return res.redirect('/ventas?venta=ok')
+                })
             })
         })
     }
