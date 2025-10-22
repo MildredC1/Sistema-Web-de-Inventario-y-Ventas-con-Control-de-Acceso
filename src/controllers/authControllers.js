@@ -2,7 +2,7 @@ import bcrypt from "bcrypt"
 import pool from "../config/db.js"
 
 // muestra el Login (GET)
-export function showLogin(req, res) {
+export function mostrarLogin(req, res) {
     res.render("login", {title: "Iniciar sesión"})
 }
 
@@ -31,6 +31,7 @@ export async function login(req, res) {
     const usuario = rows[0];
 
     const iguales = await bcrypt.compare(contrasena, usuario.contrasena)
+    
     if (!iguales) {
       return res.status(401).render("mensaje", {
         titulo: "Iniciar sesión",
@@ -38,7 +39,7 @@ export async function login(req, res) {
 
     }
     
-    req.session.user = usuario;
+    // req.session.user = usuario;
 
     // creamos la info para crear la cookie
     const infoCookie = {id: usuario.id, nombre: usuario.nombre, email: usuario.email}
@@ -68,6 +69,8 @@ export async function logout(req, res) {
 
     res.clearCookie('auth')
 
-    res.render("mensaje", {titulo: "Salida", mensaje: "Sesión cerrada correctamente"})
+    res.render("mensaje", {
+      titulo: "Salida", 
+      mensaje: "Sesión cerrada correctamente"})
     
 }
