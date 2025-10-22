@@ -1,0 +1,64 @@
+/* Estilos para la plantilla simple (mensaje.ejs) - Tarjeta Glassmorphism */
+
+/* Variables de Color basadas en la imagen de referencia (Login) */
+:root {
+  --primary-color: #ffffff; /* Púrpura oscuro para texto/encabezados */
+  --secondary-color: #e91e63; /* Rosa magenta para acentos */
+  --background-gradient: linear-gradient(135deg, #7b4397 0%, #dc2430 100%); 
+  --text-color: #333;
+  --glass-color: rgba(255, 255, 255, 0.25); /* Color base del efecto de vidrio */
+  --glass-border: rgba(255, 255, 255, 0.4); /* Borde más claro */
+}
+
+/* Estilos Generales y Fondo */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--background-gradient); 
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Contenedor que centra la tarjeta */
+.glass-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Ocupa la mayor parte de la altura visible */
+    padding: 20px;
+}
+
+/* Estilo de la tarjeta (Glassmorphism) */
+.glass-card {
+    /* Usamos variables definidas en productos.css */
+    width: 90%;
+    max-width: 500px; 
+    padding: 40px 30px;
+    border-radius: 25px;
+    text-align: center;
+    
+    /* Propiedades Glassmorphism */
+    background: var(--glass-color); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border); 
+    
+    /* Corregir el color de texto para que sea legible sobre el fondo semi-transparente */
+    color: var(--primary-color); 
+}
+
+/* Estilos de los elementos de mensaje */
+.glass-card h1 {
+    font-size: 2em;
+    color: var(--primary-color); /* Púrpura oscuro */
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
