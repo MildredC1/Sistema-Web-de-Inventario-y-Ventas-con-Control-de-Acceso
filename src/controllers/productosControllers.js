@@ -42,11 +42,22 @@ const ProductosController={
                 return res.redirect('/productos')
             })
           break
+        case 'eliminar':
+          Productos.eliminar(id, (error, resultado) => {
+              if (error) {
+                  return res.render("mensaje", {
+                      titulo: "Error al eliminar el producto",
+                      mensaje: error.message
+                  })
+              }
+            return res.redirect('/productos')
+          })
+        break
 
-          default:
-              return res.render('nuevo-producto', {
-                  errores: [`La acción '${action}' no es válida.`],
-                  datos: req.body
+        default:
+            return res.render('crear_producto', {
+                errores: [`La acción '${action}' no es válida.`],
+                datos: req.body
             })
     }
 }
