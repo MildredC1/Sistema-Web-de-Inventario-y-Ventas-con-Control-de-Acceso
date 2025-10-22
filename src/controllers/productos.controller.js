@@ -2,13 +2,17 @@ const Productos=require("../models/productos.model.js")
 
 const ProductosController = {
   listar(req,res){
+
+    // El middleware requiereAuth trae req.user, que ahora incluye el campo 'admin'
+    const esAdmin = req.user.admin; // obtenemos el rol dewsde req.user
+
     Productos.listar((error,productos) => {
       if(error){
         return res.render("mensaje", {
         titulo: "No se encontraron Productos",
         mensaje: error.message})
       }else{
-        return res.render("productos", {productos})
+        return res.render("productos", {productos, esAdmin})
       }
     })
   },

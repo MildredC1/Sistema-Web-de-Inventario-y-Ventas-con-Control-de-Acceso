@@ -42,7 +42,12 @@ export async function login(req, res) {
     // req.session.user = usuario;
 
     // creamos la info para crear la cookie
-    const infoCookie = {id: usuario.id, nombre: usuario.nombre, email: usuario.email}
+    const infoCookie = {
+      id: usuario.id, 
+      nombre: usuario.nombre, 
+      email: usuario.email,
+      admin: usuario.admin // añadimos el rol
+    }
 
     res.cookie('auth', JSON.stringify(infoCookie), {
       httpOnly: true,
