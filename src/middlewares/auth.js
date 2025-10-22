@@ -41,7 +41,7 @@ export function redireccionAuth(req, res, next) {
     const hayCookies = req.signedCookies?.auth
     
     if(hayCookies)
-        return res.redirect("/")
+        return res.redirect("/login")
 
     next()
 }
