@@ -18,11 +18,11 @@ const ProductosController = {
   },
   procesar(req, res) {
     console.log(req.body)
-    const { action, nombre, categoria, marca, precio, stock, proveedor_email, rating, descuento } = req.body
+    const { id ,action, nombre, categoria, marca, precio, stock, proveedor_email, rating, descuento } = req.body
 
     switch(action) {
         case 'agregar':
-            Productos.crear({ nombre, categoria, marca, precio, stock, proveedor_email, rating, descuento }, (error, resultado) => {
+            Productos.crear({ nombre, categoria, marca, precio, stock, proveedor_email, rating, descuento}, (error, resultado) => {
                 if (error) {
                   return res.render("mensaje", {
                     titulo: "Error al agregar el producto",
@@ -35,7 +35,7 @@ const ProductosController = {
             })
           break
         case 'editar':
-            Productos.editar(id, { nombre, categoria, marca, precio, stock, proveedor_email, rating, descuento }, (error, resultado) => {
+            Productos.editar({id, nombre, categoria, marca, precio, stock, proveedor_email, rating, descuento }, (error, resultado) => {
                 if (error) {
                     return res.render("mensaje", {
                         titulo: "Error al editar el producto",
