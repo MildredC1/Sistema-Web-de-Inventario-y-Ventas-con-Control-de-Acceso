@@ -29,20 +29,27 @@ const ProductosController={
 
                 return res.redirect('/productos')
             })
-            break
+          break
+        case 'editar':
+            Productos.editar(id, { nombre, categoria, marca, precio, stock, proveedor_email, rating, descuento }, (error, resultado) => {
+                if (error) {
+                    return res.render("mensaje", {
+                        titulo: "Error al editar el producto",
+                        mensaje: error.message
+                    })
+                }
 
+                return res.redirect('/productos')
+            })
+          break
 
-
-        default:
-            return res.render('nuevo-producto', {
-                errores: [`La acción '${action}' no es válida.`],
-                datos: req.body
+          default:
+              return res.render('nuevo-producto', {
+                  errores: [`La acción '${action}' no es válida.`],
+                  datos: req.body
             })
     }
 }
-
-
-
 
 }
 module.exports=ProductosController
