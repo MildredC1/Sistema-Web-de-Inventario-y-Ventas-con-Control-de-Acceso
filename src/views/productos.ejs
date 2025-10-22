@@ -121,6 +121,25 @@
       cancelarBtn.style.display = 'none';
       eliminarBtn.style.display = 'inline';
     }
+    function confirmarEliminacion(index) {
+      const nombre = document.getElementById(`nombre-${index}`).value;
+      const confirmado = confirm(`¿Estás segura de que deseas eliminar el producto "${nombre}"?`);
+
+      if (confirmado) {
+        const form = document.querySelectorAll('.editar-form')[index];
+
+        // Crear input oculto para enviar la acción 'eliminar'
+        const accionInput = document.createElement('input');
+        accionInput.type = 'hidden';
+        accionInput.name = 'action';
+        accionInput.value = 'eliminar';
+        form.appendChild(accionInput);
+
+        form.submit();
+      }
+    }
+    
+    
   </script>
 
 </body>
