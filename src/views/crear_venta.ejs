@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Módulo de Ventas</title>
+    <link rel="stylesheet" href="../../public/css/crear_venta.css"/>
+  </head>
+
+  <body>
+    <h1>Módulo de Ventas</h1>
+
+    <h2>Registrar Nueva Venta</h2>
+    <form action="/ventas" method="POST" class="registro-form">
+      <div>
+        <label for="producto_id">Producto:</label>
+        <select name="producto_id" id="producto_id" required>
+          <option value="">-- Seleccione un producto --</option>
+
+          <% productos.forEach(producto=> { %> <% if (producto.stock> 0) { %>
+          <option value="<%= producto.id %>">
+            <%= producto.nombre %> (Stock: <%= producto.stock %>)
+          </option>
+          <% } %> <% }) %>
+        </select>
+      </div>
+
+      <div>
+        <label for="cantidad">Cantidad a Vender:</label>
+        <input type="number" name="cantidad" id="cantidad" min="1" required />
+      </div>
+
+      <button type="submit">Registrar Venta</button>
+    </form>
+
+    <hr />
+    
+    </body>
+</html>
