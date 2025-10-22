@@ -1,7 +1,7 @@
 import {Router} from 'express';
 
 import * as auth from "../controllers/auth.controller.js"
-import productosController from "../controllers/productosControllers.js"
+import productosController from "../controllers/productos.controller.js"
 
 import { redirectAuth } from '../middlewares/auth.js';
 

@@ -1,4 +1,4 @@
-const Productos=require("../models/productosModels.js")
+const Productos=require("../models/productos.model.js")
 
 const ProductosController = {
   listar(req,res){
@@ -63,4 +63,5 @@ const ProductosController = {
 }
 
 }
-module.exports=ProductosController
+
+module.exports = ProductosController
