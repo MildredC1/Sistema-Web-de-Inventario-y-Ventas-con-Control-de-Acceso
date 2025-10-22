@@ -18,19 +18,38 @@ const VentasController = {
 
         const cantidadVenta = parseInt(cantidad)
 
-        // Registrar la venta
-        Ventas.crear({ producto_id, cantidad: cantidadVenta, vendedor_id }, (errorVenta, resultadoVenta) => {
-            if (errorVenta) {
-                console.error("Error al registrar venta:", errorVenta)
+        // Validar cantidad ≤ stock (Buscar stock actual)
+        Ventas.buscarStock(producto_id, (error, resultadosStock) => {
+            if (error || resultadosStock.length === 0) {
                 return res.status(500).render("mensaje", {
-                    titulo: "Error al Registrar Venta",
-                    mensaje: "Ocurrió un error al guardar la venta en la base de datos."
+                    titulo: "Error de Validación",
+                    mensaje: "No se pudo obtener el stock del producto."
                 })
             }
 
-            // Si todo sale bien redireccionar
-            return res.redirect('/ventas?venta=ok')
+            const stockActual = resultadosStock[0].stock
 
+            if (cantidadVenta > stockActual) {
+                return res.status(400).render("mensaje", {
+                    titulo: "Error de Stock",
+                    mensaje: `No hay suficiente stock. Stock disponible: ${stockActual}`
+                })
+            }
+
+            // Registrar la venta
+            Ventas.crear({ producto_id, cantidad: cantidadVenta, vendedor_id }, (errorVenta, resultadoVenta) => {
+                if (errorVenta) {
+                    console.error("Error al registrar venta:", errorVenta)
+                    return res.status(500).render("mensaje", {
+                        titulo: "Error al Registrar Venta",
+                        mensaje: "Ocurrió un error al guardar la venta en la base de datos."
+                    })
+                }
+
+                // Si todo sale bien redireccionar
+                return res.redirect('/ventas?venta=ok')
+                
+            })
         })
     }
 }

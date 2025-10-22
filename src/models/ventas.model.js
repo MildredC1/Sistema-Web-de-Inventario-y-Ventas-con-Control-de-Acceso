@@ -17,6 +17,13 @@ const VentasModel = {
         mysql.query(query, (error, resultados) => cb(error, resultados))
     },
 
+    // Busca el stock actual de un producto
+    buscarStock(productoId, cb) {
+        const query = `SELECT stock FROM productos WHERE id = ?`
+        
+        mysql.query(query, [productoId], (error, resultados) => cb(error, resultados))
+    },
+
     // Registra una nueva venta
     crear({ producto_id, cantidad, vendedor_id }, cb){
         const query = `
