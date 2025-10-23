@@ -1,0 +1,77 @@
+
+:root {
+  --primary-color: rgba(85, 79, 79, 0.274);
+  --secondary-color: #e91e63;
+  --background-gradient: linear-gradient(135deg, #7b4397 0%, #dc2430 100%);
+  --text-color: #333;
+  --glass-color: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+body{
+  background: var(--background-gradient);
+}
+/* Navbar */
+.navbar {
+  width: 100%;
+  padding: 10px 20px;
+  background: var(--glass-color);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 30px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.navbar li {
+  display: inline-block;
+  margin: 5px 10px;
+}
+
+.navbar a {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.navbar a:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.navbar li:last-child a {
+  background-color: var(--secondary-color);
+  color: white;
+  font-weight: 600;
+  .navbar-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.navbar-list li {
+  margin: 5px 10px;
+}
+
+.navbar-right {
+  margin-left: auto;
+}

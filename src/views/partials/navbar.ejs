@@ -1,0 +1,37 @@
+<head>
+  <link rel="stylesheet" href="../../../public/css/navbar.css">
+</head>
+
+<!-- Si el usuario esta logueado: se muestran todos los botones respectivos, motrando tambien el nombre del usuario y el boton cierre de sesion y si no  esta logueado se ocultan todos los botones  y solo se muestra el boton de iniciar sesion y lo redirecciona al login para crear cuenta o loguearse -->
+<% if (usuario) { %>
+  <nav class="navbar">
+    <ul>
+      <% const ruta = req.originalUrl; %>
+
+      <% if (ruta !== '/inicio') { %>
+        <li><a href="/inicio">Inicio</a></li>
+      <% } %>
+      <% if (ruta !== '/productos') { %>
+        <li><a href="/productos">Vista Productos</a></li>
+      <% } %>
+      <% if (usuario.admin === 1 && ruta !== '/producto/crear') { %>
+        <li><a href="/crear_producto">Crear Producto</a></li>
+      <% } %>
+      <% if (ruta !== '/ventas') { %>
+        <li><a href="/ventas">Vista Ventas</a></li>
+      <% } %>
+      <% if (usuario.admin === 1 && ruta !== '/ventas/crear') { %>
+        <li><a href="/crear_venta">Crear Venta</a></li>
+      <% } %>
+
+      <li><span style="padding: 10px 16px; color: white;">👤 <%= usuario.nombre %></span></li>
+      <li style="float:right"><a href="/logout">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+<% } else { %>
+  <nav class="navbar">
+    <ul>
+      <li style="float:right"><a href="/login">Iniciar sesión</a></li>
+    </ul>
+  </nav>
+<% } %>
