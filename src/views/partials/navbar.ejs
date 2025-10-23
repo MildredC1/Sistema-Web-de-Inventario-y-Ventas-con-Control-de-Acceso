@@ -24,7 +24,11 @@
         <li><a href="/crear_venta">Crear Venta</a></li>
       <% } %>
 
-      <li><span style="padding: 10px 16px; color: white;">👤 <%= usuario.nombre %></span></li>
+      <li class="navbar-user">
+      <img src="/img/<%= usuario.foto || 'default.jpg' %>" alt="Fotodeperfil" class="navbar-avatar">
+        <span><%= usuario.nombre %></span>
+      </li>
+      
       <li style="float:right"><a href="/logout">Cerrar sesión</a></li>
     </ul>
   </nav>

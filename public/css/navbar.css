@@ -55,18 +55,7 @@ body{
   transform: translateY(-1px);
 }
 
-.navbar li:last-child a {
-  background-color: var(--secondary-color);
-  color: white;
-  font-weight: 600;
-  .navbar-list {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
+
 
 .navbar-list li {
   margin: 5px 10px;
@@ -74,4 +63,31 @@ body{
 
 .navbar-right {
   margin-left: auto;
+}
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.navbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+.navbar li:last-child a {
+  background-color: var(--secondary-color);
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 10px 16px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.navbar li:last-child a:hover {
+  background-color: #c2185b; /* tono más oscuro del secundario */
+  transform: translateY(-1px);
 }
