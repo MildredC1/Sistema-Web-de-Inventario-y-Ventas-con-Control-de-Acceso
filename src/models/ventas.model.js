@@ -45,6 +45,25 @@ const VentasModel = {
         const parametros = [cantidad, producto_id]
         
         mysql.query(query, parametros, (err, results) => cb(err, results))
+    },
+
+    editar({id, producto_id, cantidad, vendedor_id}, cb){
+        const query = `
+          UPDATE ventas
+          SET producto_id = ?, cantidad = ?, vendedor_id = ?
+          WHERE id = ?`
+        
+        const parametros = [producto_id, cantidad, vendedor_id, id]
+        
+        mysql.query(query, parametros, (err, results) => cb(err, results))
+    },
+
+    eliminar(id, cb) {
+        const query = `
+            DELETE FROM ventas
+            WHERE id = ?`
+
+        mysql.query(query, [id], (err, results) => cb(err, results))
     }
 }
 
