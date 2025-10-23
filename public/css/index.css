@@ -1,0 +1,102 @@
+:root {
+  --primary-color: #7b4397;
+  --secondary-color: #dc2430;
+  --accent-color: #8d1428;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --text-light: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-light);
+  min-height: 100vh;
+}
+
+/* Contenedor principal */
+main {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Estilo glassmorphism para los divs */
+.bienvenida,
+.instrucciones {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Títulos */
+.bienvenida h2,
+.instrucciones h2 {
+  font-size: 2em;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Párrafos */
+.bienvenida p,
+.instrucciones p {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+
+/* Lista de opciones */
+.instrucciones ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.instrucciones ul li {
+  position: relative;
+  padding-left: 28px;
+  margin: 20px;
+  font-size: 1.05em;
+  font-weight: 500;
+  color: white;
+}
+
+/* Viñeta tipo texto personalizada */
+.instrucciones ul li::before {
+  content: "✦"; /* Puedes cambiar por ✦, ➤, ✔, ⬤, etc. */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.2em;
+  color: var(--accent-color);
+}
+
+/* Enlaces destacados */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

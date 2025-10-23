@@ -1,0 +1,26 @@
+<head>
+  <link rel="stylesheet" href="../../public/css/index.css">
+
+</head>
+<% if (!usuario) { %>
+  <div class="bienvenida">
+    <h2>¡Bienvenido al sistema de inventario y ventas!</h2>
+    <p>Para comenzar, <a href="/login" style="color: #8d1428;">inicia sesión</a> o crea una cuenta nueva.</p>
+  </div>
+<% } else { %>
+  <div class="instrucciones">
+    <h2>¡Hola <%= usuario.nombre %>!</h2>
+    <p>Tu rol actual es: <strong><%= usuario.admin === 1 ? 'Administrador' : 'Trabajador' %></strong></p>
+    <p>Usa el menú superior para navegar entre las siguientes opciones:</p>
+    <ul class="instrucciones" style="list-style: none; padding: 0;">
+      <li> Vista Productos</li>
+      <% if (usuario.admin === 1) { %>
+        <li>Crear Producto</li>
+      <% } %>
+      <li>Vista Ventas</li>
+      <% if (usuario.admin === 1) { %>
+        <li>Crear Venta</li>
+      <% } %>
+    </ul>
+  </div>
+<% } %>
