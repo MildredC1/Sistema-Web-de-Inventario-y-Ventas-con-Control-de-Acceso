@@ -16,6 +16,7 @@ const ProductosController = {
       }
     })
   },
+  
   procesar(req, res) {
     console.log(req.body)
     const { id ,action, nombre, categoria, marca, precio, stock, proveedor_email, rating, descuento } = req.body
@@ -63,8 +64,12 @@ const ProductosController = {
                 errores: [`La acción '${action}' no es válida.`],
                 datos: req.body
             })
-    }
-}
+        }
+  }, 
+
+  mostrarFormulario(req, res) {
+    res.render("crear_producto")
+  }
 
 }
 
