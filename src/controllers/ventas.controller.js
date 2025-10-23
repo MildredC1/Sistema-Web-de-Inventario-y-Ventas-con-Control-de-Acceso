@@ -95,6 +95,10 @@ const VentasController = {
                 })
             })
         })
+    },
+
+    mostrarFormulario(req, res) {
+        res.render("crear_venta")
     }
 }
 
