@@ -52,6 +52,12 @@ main {
   margin-bottom: 20px;
 }
 
+/* links */
+.bienvenida a:hover {
+  color: #dc2430;
+  text-decoration: none;
+}
+
 /* Lista de opciones */
 .instrucciones ul {
   list-style: none;
