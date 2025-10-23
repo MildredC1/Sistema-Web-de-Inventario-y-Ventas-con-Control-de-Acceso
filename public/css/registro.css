@@ -1,0 +1,168 @@
+:root {
+  --primary-color: #7b4397;
+  --secondary-color: #e91e63;
+  --coral-color: #e91e63;
+  --coral-hover: #ffffff;
+  --text-light: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  z-index: -1;
+}
+
+.registro-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.registro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Foto circular con ícono */
+.foto-circular {
+  display: flex;
+  
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.foto-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--coral-color);
+  overflow: hidden;
+  background-color: #fff;
+  cursor: pointer;
+  
+}
+
+.preview-foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.icono-camara {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: var(--coral-color);
+  color: #cf5858;
+  border-radius: 50%;
+  padding: 6px;
+  font-size: 0.9em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Inputs */
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  font-size: 1em;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Botón coral */
+.btn.registro-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: var(--coral-color);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn.registro-btn:hover {
+  color: #e91e63;
+  background-color: var(--coral-hover);
+}
+
+/* Link */
+.link-login {
+  font-size: 0.9em;
+  color: black;
+  text-decoration: none;
+}
+
+.link-login:hover {
+  color: #e9d8dd;
+}
+.foto-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #e91e63; /* coral */
+  overflow: hidden;
+  background-color: #e9d8dd;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: none; /* Oculto hasta que se cargue una imagen */
+}
+
+.icono-foto {
+  color: #da6e94;
+  font-size: 2em;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+.foto-wrapper:hover .icono-foto {
+  transform: scale(1.2);
+  color: var(--coral-color);
+  opacity: 0.9;
+}
+.foto-wrapper:hover .icono-foto {
+  transform: scale(1.2);
+  color: var(--coral-color);
+  opacity: 0.9;
+}

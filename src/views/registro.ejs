@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/public/css/registro.css">
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="registro-container">
+    <form class="registro-form" method="post" action="/registro" enctype="multipart/form-data">
+      
+      <!-- Foto circular con ícono -->
+      <div class="foto-circular">
+        <label for="foto">
+          <div class="foto-wrapper">
+            <img src="/img/default.jpg" alt="Foto por defecto" id="preview" class="preview-foto">
+            <div class="icono-foto"><i class="fas fa-image"></i></div>
+          </div>
+          <input type="file" id="foto" name="foto" accept="image/*" style="display: none">
+        </label>
+      </div>
+
+      <!-- Campos -->
+      <div class="input-group">
+        <input type="text" name="nombre" placeholder="Nombre completo" required>
+      </div>
+
+      <div class="input-group">
+        <input type="email" name="correo" placeholder="Correo electrónico" required>
+      </div>
+
+      <div class="input-group">
+        <input type="password" name="contrasena" placeholder="Contraseña" required>
+      </div>
+
+      <!-- Rol por defecto -->
+      <input type="hidden" name="admin" value="0">
+
+      <!-- Botón -->
+      <button type="submit" class="btn registro-btn">Registrarse</button>
+      <a href="/login" class="link-login">¿Ya tienes cuenta?</a>
+    </form>
+  </div>
+
+  <!-- Script para vista previa -->
+  <script>
+    const fotoInput = document.getElementById('foto');
+    const preview = document.getElementById('preview');
+    const icono = document.querySelector('.icono-foto');
+
+    fotoInput.addEventListener('change', () => {
+      const file = fotoInput.files[0];
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+        icono.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
