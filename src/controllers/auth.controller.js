@@ -6,7 +6,7 @@ import path from 'path';
 
 // muestra el Login (GET)
 export function mostrarLogin(req, res) {
-    res.render("login", {title: "Iniciar sesión"})
+    res.render("login")
 }
 
 // procesar el inicio de sesión (POST)
