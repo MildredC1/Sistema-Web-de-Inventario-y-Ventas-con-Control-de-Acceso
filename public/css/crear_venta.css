@@ -1,0 +1,147 @@
+/* ======================================= */
+/* VARIABLES Y ESTILOS GENERALES (GLASSMORPHISM BASE) */
+/* ======================================= */
+
+:root {
+  /* Degradado de fondo de las imágenes de referencia */
+  --background-gradient: linear-gradient(135deg, #7b4397 0%, #dc2430 100%); 
+  --primary-color: #6a0dad; /* Púrpura oscuro para texto de contraste */
+  --text-color: #fff; /* Texto blanco para el cuerpo */
+  --glass-color: rgba(255, 255, 255, 0.25); /* Color base del efecto de vidrio */
+  --glass-border: rgba(255, 255, 255, 0.4); /* Borde más claro */
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--background-gradient); 
+  color: var(--text-color);
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  color: white; 
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ======================================= */
+/* ESTILOS DEL FORMULARIO DE REGISTRO (.registro-form) */
+/* ======================================= */
+
+.registro-form {
+    width: 90%;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 25px;
+    
+    /* Efecto Glassmorphism Card */
+    background: var(--glass-color); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border); 
+}
+
+/* Contenedores de campo (para label + input/select) */
+.registro-form > div {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.registro-form label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: white;
+}
+
+/* Estilo para INPUT y SELECT (Fondo translúcido) */
+.registro-form input[type="number"],
+.registro-form select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px; 
+    /* Fondo translúcido */
+    background: rgba(255, 255, 255, 0.2); 
+    color: white; 
+    font-size: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    border: 1px solid var(--glass-border);
+    /* Necesario para hacer que el select luzca bien */
+    -webkit-appearance: none;
+    appearance: none;
+}
+.registro-form input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Opciones del Select: deben tener un fondo para ser legibles */
+.registro-form option {
+    background: var(--primary-color); /* Fondo oscuro */
+    color: white;
+}
+
+/* Botón Registrar Venta (Similar al botón Login del ejemplo) */
+.registro-form button[type="submit"] {
+    width: 100%;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    
+    /* Estilo del botón Login (Glassmorphism Suave) */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
+    color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    margin-top: 15px;
+}
+
+.registro-form button[type="submit"]:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos de la línea divisoria */
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+    width: 90%;
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+/* ======================================= */
+/* ESTILOS DE HISTORIAL (PARA COHERENCIA) */
+/* ======================================= */
+
+/* Asegura que las tablas de historial si se renderizan mantengan el estilo */
+.table-container {
+    width: 90%;
+    margin: 40px auto;
+    overflow-x: auto;
+}
+/* Estos estilos asumen que la tabla usará las clases de productos.css, 
+   pero se incluyen las básicas para mantener la coherencia si no se carga otro CSS */
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; 
+}
+.table-container th, .table-container td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+    color: white;
+}
+.table-container th {
+    background-color: var(--primary-color);
+}
