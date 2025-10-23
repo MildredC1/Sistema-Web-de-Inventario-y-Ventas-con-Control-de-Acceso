@@ -1,4 +1,6 @@
 import {Router} from 'express';
+import { upload,registroUsuario } from '../controllers/registro.controller.js';
+
 
 import * as auth from "../controllers/auth.controller.js"
 import productosController from "../controllers/productos.controller.js"
@@ -22,5 +24,8 @@ router.post("/productos", requiereAuth, productosController.procesar) // Procesa
 // Rutas relacionadas con 'Ventas'
 router.get("/ventas", requiereAuth, ventasController.mostrar)   // Mostrar formulario y listado Ventas
 router.post("/ventas", requiereAuth, ventasController.registrar) // Procesar registro Ventas
+
+router.get('/registro', redireccionAuth,auth.mostrarRegistro); // Mostrar formulario de registro
+router.post('/registro', upload.single('foto'),registroUsuario); // Procesar registro con imagen
 
 export default router
