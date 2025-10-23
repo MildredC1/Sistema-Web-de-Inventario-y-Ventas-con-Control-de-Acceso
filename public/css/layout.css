@@ -1,0 +1,78 @@
+:root {
+  --primary-color: #7b4397;
+  --secondary-color: #dc2430;
+  --accent-color: #ffc107;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --text-light: #ffffff;
+  --text-dark: #222222;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--text-light);
+  min-height: 100vh;
+}
+
+/* Navbar base */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+nav a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 15px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main content wrapper */
+main {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Footer (si decides agregar uno) */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  color: var(--text-light);
+  opacity: 0.8;
+}
+
+/* Animación suave de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main > * {
+  animation: fadeIn 0.6s ease-in-out;
+}
