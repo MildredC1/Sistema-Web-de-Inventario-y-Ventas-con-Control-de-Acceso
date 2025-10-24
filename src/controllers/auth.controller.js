@@ -136,29 +136,38 @@ export function registroUsuario(req, res) {
         });
       }
 
-      // Si no hay datos repetidos, registrar el nuevo usuario
-      const nuevoUsuario = [nombre, correo, contrasena, admin || 0, foto];
-
-      pool.query(
-        'INSERT INTO usuarios (nombre, correo, contrasena, admin, foto) VALUES (?, ?, ?, ?, ?)',
-        nuevoUsuario,
-        (error, results) => {
-          if (error) {
-            console.error('Error al registrar usuario:', error);
-            return res.status(500).render('mensaje', {
-              titulo: 'Error',
-              mensaje: 'No se pudo registrar el usuario',
-              redireccionar: true,
-              linkMensaje: "Volver al inicio",
-              link: "/"
-            });
-          }
-          res.redirect('/login');
+      // Encriptar la contraseña antes de guardar
+      bcrypt.hash(contrasena, 10, (err, hash) => {
+        if (err) {
+          console.error('Error al encriptar contraseña:', err);
+          return res.status(500).render('mensaje', {
+            titulo: 'Error',
+            mensaje: 'No se pudo procesar la contraseña'
+          });
         }
-      );
+
+        const nuevoUsuario = [nombre, correo, hash, admin || 0, foto];
+
+        pool.query(
+          'INSERT INTO usuarios (nombre, correo, contrasena, admin, foto) VALUES (?, ?, ?, ?, ?)',
+          nuevoUsuario,
+          (error, results) => {
+            if (error) {
+              console.error('Error al registrar usuario:', error);
+              return res.status(500).render('mensaje', {
+                titulo: 'Error',
+                mensaje: 'No se pudo registrar el usuario'
+              });
+            }
+
+            res.redirect('/login');
+          }
+        );
+      });
     }
   );
 }
+
 
 // cerrar sesión(GET)
 export async function logout(req, res) {
