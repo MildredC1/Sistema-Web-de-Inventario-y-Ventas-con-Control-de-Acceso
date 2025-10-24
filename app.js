@@ -20,6 +20,11 @@ const __dirname = path.dirname(__filename);
 // importacion cookieParser
 import cookieParser from 'cookie-parser';
 
+// importaciones para rutas
+import authRoutes from './src/routes/auth.routes.js'
+import productosRoutes from './src/routes/productos.routes.js'
+import ventasRoutes from './src/routes/ventas.routes.js'
+
 
 
 app.listen(PORT, () => {
