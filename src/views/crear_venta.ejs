@@ -15,7 +15,7 @@
         <select name="producto_id" id="producto_id" required>
           <option value="">-- Seleccione un producto --</option>
 
-          <% productos.forEach(producto=> { %> <% if (producto.stock> 0) { %>
+          <% productos.forEach(producto => { %> <% if (producto.stock > 0) { %>
           <option value="<%= producto.id %>">
             <%= producto.nombre %> (Stock: <%= producto.stock %>)
           </option>
@@ -28,7 +28,7 @@
         <input type="number" name="cantidad" id="cantidad" min="1" required />
       </div>
 
-      <button type="submit">Registrar Venta</button>
+      <button type="submit" name="action" value="agregar">Registrar Venta</button>
     </form>
 
     <hr />
