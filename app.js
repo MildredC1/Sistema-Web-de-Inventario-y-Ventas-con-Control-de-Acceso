@@ -6,6 +6,13 @@ const app = express();
 const PORT = process.env.PORT 
 const HOST = process.env.HOST 
 
+app.use((req, res, next) => {
+    console.log(`Logger - Solicitud recibida: ${req.method} ${req.url}`)
+    next()
+})
+
+
+
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://${HOST}:${PORT}`);
 });
