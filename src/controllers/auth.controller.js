@@ -142,7 +142,10 @@ export function registroUsuario(req, res) {
           console.error('Error al encriptar contraseña:', err);
           return res.status(500).render('mensaje', {
             titulo: 'Error',
-            mensaje: 'No se pudo procesar la contraseña'
+            mensaje: 'No se pudo procesar la contraseña',
+            redireccionar: true,
+            linkMensaje: "Volver al registro",
+            link: "/registro"
           });
         }
 
@@ -156,7 +159,10 @@ export function registroUsuario(req, res) {
               console.error('Error al registrar usuario:', error);
               return res.status(500).render('mensaje', {
                 titulo: 'Error',
-                mensaje: 'No se pudo registrar el usuario'
+                mensaje: 'No se pudo registrar el usuario',
+                redireccionar: true,
+                linkMensaje: "Volver al registro",
+                link: "/registro"
               });
             }
 
