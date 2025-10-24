@@ -25,7 +25,9 @@ import authRoutes from './src/routes/auth.routes.js'
 import productosRoutes from './src/routes/productos.routes.js'
 import ventasRoutes from './src/routes/ventas.routes.js'
 
-
+// motor de vistas
+app.set('views', path.join(__dirname, 'src/views'));
+app.set('view engine', 'ejs');
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://${HOST}:${PORT}`);
