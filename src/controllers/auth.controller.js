@@ -16,7 +16,11 @@ export async function login(req, res) {
   if (!correo || !contrasena) {
         return  res.status(400).render("mensaje", {
           titulo: "Iniciar sesión", 
-          mensaje: "Todos los campos son obligatorios"})
+          mensaje: "Todos los campos son obligatorios",
+          redireccionar: true,
+          linkMensaje: "Volver al Login",
+          link: "/login"
+        })
   }
   
   try {
@@ -28,7 +32,11 @@ export async function login(req, res) {
     if (rows.length === 0) {
       return res.status(401).render("mensaje", {
         titulo: "Iniciar sesión", 
-        mensaje: "Credenciales inválidas"})
+        mensaje: "Credenciales inválidas",
+        redireccionar: true,
+        linkMensaje: "Porfavor Registrate",
+        link: "/registro"
+      })
     }
 
     const usuario = rows[0];
@@ -38,7 +46,11 @@ export async function login(req, res) {
     if (!iguales) {
       return res.status(401).render("mensaje", {
         titulo: "Iniciar sesión",
-        mensaje: "Credenciales inválidas"})
+        mensaje: "Credenciales inválidas",
+        redireccionar: true,
+        linkMensaje: "Volver al Login",
+        link: "/login"
+      })
 
     }
     
@@ -69,7 +81,11 @@ export async function login(req, res) {
     console.log(error)
     res.status(500).render("mensaje", {
       titulo: "Error", 
-      mensaje: "No se pudo iniciar sesión"})
+      mensaje: "No se pudo iniciar sesión",
+      redireccionar: true,
+      linkMensaje: "Volver al inicio",
+      link: "/"
+    })
   }
   
 }
@@ -103,14 +119,20 @@ export function registroUsuario(req, res) {
         console.error('Error al verificar datos repetidos:', error);
         return res.status(500).render('mensaje', {
           titulo: 'Error',
-          mensaje: 'No se pudo verificar los datos del usuario'
+          mensaje: 'No se pudo verificar los datos del usuario',
+          redireccionar: true,
+          linkMensaje: "Volver al registro",
+          link: "/registro"
         });
       }
 
       if (resultados.length > 0) {
         return res.status(400).render('mensaje', {
           titulo: 'Registro',
-          mensaje: 'Ya existe un usuario con ese nombre o correo electrónico'
+          mensaje: 'Ya existe un usuario con ese nombre o correo electrónico',
+          redireccionar: true,
+          linkMensaje: "Volver al registro",
+          link: "/registro"
         });
       }
 
@@ -120,7 +142,10 @@ export function registroUsuario(req, res) {
           console.error('Error al encriptar contraseña:', err);
           return res.status(500).render('mensaje', {
             titulo: 'Error',
-            mensaje: 'No se pudo procesar la contraseña'
+            mensaje: 'No se pudo procesar la contraseña',
+            redireccionar: true,
+            linkMensaje: "Volver al registro",
+            link: "/registro"
           });
         }
 
@@ -134,7 +159,10 @@ export function registroUsuario(req, res) {
               console.error('Error al registrar usuario:', error);
               return res.status(500).render('mensaje', {
                 titulo: 'Error',
-                mensaje: 'No se pudo registrar el usuario'
+                mensaje: 'No se pudo registrar el usuario',
+                redireccionar: true,
+                linkMensaje: "Volver al registro",
+                link: "/registro"
               });
             }
 
@@ -154,6 +182,10 @@ export async function logout(req, res) {
 
     res.render("mensaje", {
       titulo: "Salida", 
-      mensaje: "Sesión cerrada correctamente"})
+      mensaje: "Sesión cerrada correctamente",
+      redireccionar: true,
+      linkMensaje: "Volver al inicio",
+      link: "/"
+      })
     
 }

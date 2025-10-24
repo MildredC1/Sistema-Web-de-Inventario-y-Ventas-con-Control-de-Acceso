@@ -7,7 +7,13 @@ const VentasController = {
             // Necesitamos los productos para llenar el <campos> en el formulario
             productosModel.listar((errorProductos, productos) => {
                 if (errorProductos) {
-                    throw new Error("Error al obtener productos: " + errorProductos.message)
+                    return res.render("mensaje", {
+                        titulo: "Error al obtener productos",
+                        mensaje: error.message,
+                        redireccionar: true,
+                        linkMensaje: "Volver al inicio",
+                        link: "/"
+                    })
                 }
 
                 ventasModel.listar((errorVentas, historialVentas) => {
@@ -31,7 +37,10 @@ const VentasController = {
         } catch (error) {
             return res.status(500).render("mensaje", {
                 titulo: "Error en el módulo de Ventas",
-                mensaje: error.message
+                mensaje: error.message,
+                redireccionar: true,
+                linkMensaje: "Volver al inicio",
+                link: "/"
             })
         }
     },
@@ -49,7 +58,10 @@ const VentasController = {
                 if (!producto_id || !cantidad || isNaN(cantidad) || cantidad <= 0) {
                     return res.status(400).render("mensaje", {
                         titulo: "Error al Registrar Venta",
-                        mensaje: "El producto y la cantidad deben ser válidos."
+                        mensaje: "El producto y la cantidad deben ser válidos.",
+                        redireccionar: true,
+                        linkMensaje: "Crear Venta",
+                        link: "/crear_venta"
                     })
                 }
 
@@ -60,7 +72,10 @@ const VentasController = {
                     if (error || resultadosStock.length === 0) {
                         return res.status(500).render("mensaje", {
                             titulo: "Error de Validación",
-                            mensaje: "No se pudo obtener el stock del producto."
+                            mensaje: "No se pudo obtener el stock del producto.",
+                            redireccionar: true,
+                            linkMensaje: "Volver a crear Venta",
+                            link: "/crear_venta"
                         })
                     }
 
@@ -69,7 +84,10 @@ const VentasController = {
                     if (cantidadVenta > stockActual) {
                         return res.status(400).render("mensaje", {
                             titulo: "Error de Stock",
-                            mensaje: `No hay suficiente stock. Stock disponible: ${stockActual}`
+                            mensaje: `No hay suficiente stock. Stock disponible: ${stockActual}`,
+                            redireccionar: true,
+                            linkMensaje: "Volver a crear Venta",
+                            link: "/crear_venta"
                         })
                     }
 
@@ -79,7 +97,10 @@ const VentasController = {
                             console.error("Error al registrar venta:", errorVenta)
                             return res.status(500).render("mensaje", {
                                 titulo: "Error al Registrar Venta",
-                                mensaje: "Ocurrió un error al guardar la venta en la base de datos."
+                                mensaje: "Ocurrió un error al guardar la venta en la base de datos.",
+                                redireccionar: true,
+                                linkMensaje: "Volver a crear Venta",
+                                link: "/crear_venta"
                             })
                         }
 
@@ -90,7 +111,10 @@ const VentasController = {
                                 console.error("ERROR CRÍTICO: Stock no actualizado después de la venta:", errorStock)
                                 return res.status(500).render("mensaje", {
                                     titulo: "Venta Registrada, Error de Inventario",
-                                    mensaje: "Venta registrada, pero falló la actualización del inventario. Revisar logs."
+                                    mensaje: "Venta registrada, pero falló la actualización del inventario. Revisar logs.",
+                                    redireccionar: true,
+                                    linkMensaje: "Ver ventas",
+                                    link: "/ventas"
                                 })
                             }
 
@@ -107,7 +131,10 @@ const VentasController = {
                     if (error) {
                         return res.render("mensaje", {
                             titulo: "Error al editar la venta",
-                            mensaje: error.message
+                            mensaje: error.message,
+                            redireccionar: true,
+                            linkMensaje: "Ver ventas",
+                            link: "/ventas"
                         })
                     }
 
@@ -120,7 +147,10 @@ const VentasController = {
                     if (error) {
                         return res.render("mensaje", {
                             titulo: "Error al eliminar la venta",
-                            mensaje: error.message
+                            mensaje: error.message,
+                            redireccionar: true,
+                            linkMensaje: "Ver ventas",
+                            link: "/ventas"
                         })
                     }
                     

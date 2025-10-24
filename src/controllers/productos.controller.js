@@ -10,7 +10,11 @@ const ProductosController = {
       if(error){
         return res.render("mensaje", {
         titulo: "No se encontraron Productos",
-        mensaje: error.message})
+        mensaje: error.message,
+        redireccionar: true,
+        linkMensaje: "Volver al inicio",
+        link: "/"
+      })
       }else{
         return res.render("productos", {productos, esAdmin})
       }
@@ -27,7 +31,10 @@ const ProductosController = {
                 if (error) {
                   return res.render("mensaje", {
                     titulo: "Error al agregar el producto",
-                    mensaje: error.message
+                    mensaje: error.message,
+                    redireccionar: true,
+                    linkMensaje: "Ver productos",
+                    link: "/productos"
                   })  
                     
                 }
@@ -40,7 +47,10 @@ const ProductosController = {
                 if (error) {
                     return res.render("mensaje", {
                         titulo: "Error al editar el producto",
-                        mensaje: error.message
+                        mensaje: error.message,
+                        redireccionar: true,
+                        linkMensaje: "Ver productos",
+                        link: "/productos"
                     })
                 }
 
@@ -52,7 +62,10 @@ const ProductosController = {
               if (error) {
                   return res.render("mensaje", {
                       titulo: "Error al eliminar el producto",
-                      mensaje: error.message
+                      mensaje: error.message,
+                      redireccionar: true,
+                      linkMensaje: "Ver productos",
+                      link: "/productos"
                   })
               }
             return res.redirect('/productos')

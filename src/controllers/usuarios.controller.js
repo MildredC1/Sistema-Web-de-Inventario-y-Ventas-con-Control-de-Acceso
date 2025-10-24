@@ -9,7 +9,10 @@ const UsuariosController = {
             // Si NO es admin, denegar el acceso
             return res.status(403).render("mensaje", {
                 titulo: "Acceso Denegado",
-                mensaje: "No tienes permisos de administrador para ver este módulo."
+                mensaje: "No tienes permisos de administrador para ver este módulo.",
+                redireccionar: true,
+                linkMensaje: "Volver al inicio",
+                link: "/"
             })
         }
 
@@ -19,7 +22,10 @@ const UsuariosController = {
                 console.error("Error al listar usuarios:", error)
                 return res.status(500).render("mensaje", {
                     titulo: "Error en el Sistema",
-                    mensaje: "No se pudieron obtener los datos de los usuarios."
+                    mensaje: "No se pudieron obtener los datos de los usuarios.",
+                    redireccionar: true,
+                    linkMensaje: "Volver al inicio",
+                    link: "/"
                 })
             }
         
@@ -34,7 +40,10 @@ const UsuariosController = {
         if (!esAdmin) {
             return res.status(403).render("mensaje", {
                 titulo: "Acceso Denegado",
-                mensaje: "No tienes permisos de administrador para modificar usuarios."
+                mensaje: "No tienes permisos de administrador para modificar usuarios.",
+                redireccionar: true,
+                linkMensaje: "Volver al inicio",
+                link: "/"
             })
         }
 
@@ -51,7 +60,10 @@ const UsuariosController = {
                 if (!id || !nombre || !correo) {
                     return res.status(400).render("mensaje", {
                         titulo: "Error de Edición",
-                        mensaje: "Todos los campos (nombre, correo) son obligatorios."
+                        mensaje: "Todos los campos (nombre, correo) son obligatorios.",
+                        redireccionar: true,
+                        linkMensaje: "Mostrar usuarios",
+                        link: "/usuarios"
                     })
                 }
 
@@ -60,7 +72,10 @@ const UsuariosController = {
                         console.error("Error al editar usuario:", error)
                         return res.render("mensaje", {
                             titulo: "Error al editar el usuario",
-                            mensaje: error.message
+                            mensaje: error.message,
+                            redireccionar: true,
+                            linkMensaje: "Mostrar usuarios",
+                            link: "/usuarios"
                         })
                     }
                     
@@ -73,7 +88,10 @@ const UsuariosController = {
                 if (req.user.id === parseInt(id)) {
                     return res.status(400).render("mensaje", {
                         titulo: "Error de Eliminación",
-                        mensaje: "No puedes eliminar tu propia cuenta de usuario mientras estás logueado."
+                        mensaje: "No puedes eliminar tu propia cuenta de usuario mientras estás logueado.",
+                        redireccionar: true,
+                        linkMensaje: "Mostrar usuarios",
+                        link: "/usuarios"
                     })
                 }
                 
@@ -82,7 +100,10 @@ const UsuariosController = {
                         console.error("Error al eliminar usuario:", error)
                         return res.render("mensaje", {
                             titulo: "Error al eliminar el usuario",
-                            mensaje: error.message
+                            mensaje: error.message,
+                            redireccionar: true,
+                            linkMensaje: "Mostrar usuarios",
+                            link: "/usuarios"
                         })
                     }
 
@@ -93,7 +114,10 @@ const UsuariosController = {
             default:
                 return res.status(400).render("mensaje", {
                     titulo: "Acción Inválida",
-                    mensaje: `La acción '${action}' no es válida.`
+                    mensaje: `La acción '${action}' no es válida.`,
+                    redireccionar: false,
+                    linkMensaje: "",
+                    link: ""
                 })
         }
     }
