@@ -47,9 +47,9 @@ app.use((req, res) => {
   res.status(404).render('mensaje', { 
     titulo: '404 - No encontrado', 
     mensaje: `La ruta ${req.originalUrl} no existe.`,
-        redireccionar: false,
-        linkMensaje: "",
-        link: ""  
+    redireccionar: false,
+    linkMensaje: "",
+    link: ""  
   });
 });
 

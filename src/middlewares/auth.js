@@ -31,7 +31,11 @@ export function requiereAuth(req, res, next) {
         console.log("Error en requiereAuth: ", error)
         return res.status(401).render('mensaje', { 
             titulo: "No autorizado",
-            mensaje: "Debes iniciar sesión"})
+            mensaje: "Debes iniciar sesión",
+            redireccionar: true,
+            linkMensaje: "Volver al inicio",
+            link: "/"
+            })
     }
 }
 
