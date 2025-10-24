@@ -1,3 +1,4 @@
+
 const pool = require('../config/db.js')
 
 const UsuariosModel = {
@@ -21,7 +22,7 @@ const UsuariosModel = {
         
         const parametros = [nombre, correo, valorAdminSql, id]
 
-        mysql.query(query, parametros, (err, results) => cb(err, results))
+        pool.query(query, parametros, (err, results) => cb(err, results))
     },
     
     eliminar(id, cb) {
