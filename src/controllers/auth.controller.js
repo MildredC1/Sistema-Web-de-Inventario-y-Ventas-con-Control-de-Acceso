@@ -49,8 +49,8 @@ export async function login(req, res) {
       id: usuario.id, 
       nombre: usuario.nombre, 
       email: usuario.email,
-      admin: usuario.admin, // añadimos el rol
-      foto:usuario.foto//foto del usuario
+      admin: usuario.admin,
+      foto:usuario.foto
     }
 
     res.cookie('auth', JSON.stringify(infoCookie), {
