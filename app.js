@@ -37,6 +37,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // middleware cookieParser
 app.use(cookieParser(process.env.APP_SECRET))
 
+// rutas 
+app.use(authRoutes);
+app.use(productosRoutes);
+app.use(ventasRoutes);
+
 
 
 app.listen(PORT, () => {
