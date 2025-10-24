@@ -42,7 +42,16 @@ app.use(authRoutes);
 app.use(productosRoutes);
 app.use(ventasRoutes);
 
-
+// Mensaje Error 404 
+app.use((req, res) => {
+  res.status(404).render('mensaje', { 
+    titulo: '404 - No encontrado', 
+    mensaje: `La ruta ${req.originalUrl} no existe.`,
+        redireccionar: false,
+        linkMensaje: "",
+        link: ""  
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://${HOST}:${PORT}`);
