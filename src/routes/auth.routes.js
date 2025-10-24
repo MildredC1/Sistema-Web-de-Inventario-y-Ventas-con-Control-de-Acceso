@@ -17,7 +17,7 @@ router.get("/logout", auth.logout)
 
 // Rutas relacionadas con 'Registro'
 router.get('/registro', redireccionAuth,auth.mostrarRegistro) // Mostrar formulario de registro
-router.post('/registro', upload.single('foto'),registroUsuario) // Procesar registro con imagen
+router.post('/registro', auth.upload.single('foto'),auth.registroUsuario) // Procesar registro con imagen
 
 // Rutas relacionadas con 'usuarios'
 router.get("/usuarios", requiereAuth, usuariosController.listar) // GET para mostrar usuarios al admin
