@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { upload,registroUsuario } from '../controllers/registro.controller.js'
+import { upload,registroUsuario } from '../controllers/auth.controller.js'
 
 
 import * as auth from "../controllers/auth.controller.js"
