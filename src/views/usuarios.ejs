@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Usuarios</title>
+  <link rel="stylesheet" href="/public/css/usuarios.css">
+</head>
+<body>
+  <h1>Usuarios</h1>
+  <h2>Usuarios registrados</h2>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Rol</th>
+        <th>Foto</th>
+        <th>Acciones</th>
+      </tr>
+
+      <% usuarios.forEach((usuario, index) => { %>
+      <form action="/usuarios" method="POST" id="form-<%= index %>">
+        <tr>
+          <td>
+            <input type="text" value="<%= usuario.id %>" readonly>
+            <input type="hidden" name="id" value="<%= usuario.id %>" form="form-<%= index %>">
+          </td>
+          <td>
+            <input type="text" name="nombre" id="nombre-<%= index %>" value="<%= usuario.nombre %>" readonly form="form-<%= index %>">
+          </td>
+          <td>
+            <input type="email" name="correo" id="correo-<%= index %>" value="<%= usuario.correo %>" readonly form="form-<%= index %>">
+          </td>
+          <td>
+            <label class="switch">
+              <% if (usuario.admin === 1) { %>
+                <input type="checkbox" name="admin" id="admin-<%= index %>" value="1" form="form-<%= index %>" disabled checked>
+              <% } else { %>
+                <input type="checkbox" name="admin" id="admin-<%= index %>" value="1" form="form-<%= index %>" disabled>
+              <% } %>
+              
+              <span class="slider round"></span>
+            </label>
+          </td>
+          <td>
+            <% if (usuario.foto) { %>
+              <img src="/public/uploads/<%= usuario.foto %>" alt="Foto de perfil" class="profile-img">
+            <% } else { %>
+              <span>N/A</span>
+            <% } %>
+          </td>
+          
+          <td>
+            <% if (esAdmin) { %>
+                <button type="button" id="editarBtn-<%= index %>" onclick="habilitarEdicion(<%= index %>)">Editar</button>
+                <button type="submit" name="action" value="editar" id="guardarBtn-<%= index %>" style="display:none;">Guardar</button>
+                <button type="button" id="cancelarBtn-<%= index %>" onclick="cancelarEdicion(<%= index %>)" style="display:none;">Cancelar</button>
+                <button type="submit" name="action" value="eliminar" id="eliminarBtn-<%= index %>">Eliminar</button>
+            <% } else { %>
+                <span>No Autorizado</span>
+            <% } %>
+          </td>
+        </tr>
+      </form>
+      <% }) %>
+    </table>
+  </div>
+ 
+  <script>
+    const valoresOriginales = {};
+    const camposEditables = ['nombre', 'correo'];
+
+    function habilitarEdicion(index) {
+      valoresOriginales[index] = {};
+
+      camposEditables.forEach(campo => {
+        const input = document.getElementById(`${campo}-${index}`);
+        // Guardar valor original
+        valoresOriginales[index][campo] = input.value;
+        // Habilitar edicion
+        input.removeAttribute('readonly');
+      });
+
+      // Habilitar el switch de rol
+      const rolSwitch = document.getElementById(`admin-${index}`);
+      valoresOriginales[index]['admin'] = rolSwitch.checked;
+      rolSwitch.removeAttribute('disabled');
+      
+      // Mostrar/ocultar botones
+      document.getElementById(`editarBtn-${index}`).style.display = 'none';
+      document.getElementById(`guardarBtn-${index}`).style.display = 'inline';
+      document.getElementById(`cancelarBtn-${index}`).style.display = 'inline';
+      document.getElementById(`eliminarBtn-${index}`).style.display = 'none'; // Ocultar Eliminar al editar
+
+      document.getElementById(`nombre-${index}`).focus();
+    }
+
+    function cancelarEdicion(index) {
+      // Restaurar valores originales y volver a modo solo lectura
+      camposEditables.forEach(campo => {
+        const input = document.getElementById(`${campo}-${index}`);
+        // Restaurar valor original
+        input.value = valoresOriginales[index][campo];
+        input.setAttribute('readonly', true);
+      });
+
+      // Restaurar el switch de rol
+      const rolSwitch = document.getElementById(`admin-${index}`);
+      rolSwitch.checked = valoresOriginales[index]['admin'];
+      rolSwitch.setAttribute('disabled', true);
+
+      // Restaurar botones
+      document.getElementById(`editarBtn-${index}`).style.display = 'inline';
+      document.getElementById(`guardarBtn-${index}`).style.display = 'none';
+      document.getElementById(`cancelarBtn-${index}`).style.display = 'none';
+      document.getElementById(`eliminarBtn-${index}`).style.display = 'inline'; // Mostrar Eliminar
+    }
+  </script>
+</body>
+</html>
